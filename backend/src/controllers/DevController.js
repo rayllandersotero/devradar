@@ -7,10 +7,10 @@ module.exports = {
 	async index(req, res) {
 		await Dev.find()
 			.then((response) => {
-				return res.send(response);
+				return res.json(response);
 			})
 			.catch((error) => {
-				return res.status(400).send(error);
+				return res.status(400).json(error);
 			});
 	},
 
@@ -36,10 +36,10 @@ module.exports = {
 			location
 		})
 			.then((response) => {
-				return res.send(response);
+				return res.json(response);
 			})
 			.catch((error) => {
-				return res.status(400).send(error);
+				return res.status(400).json(error);
 			});
 	}
 };

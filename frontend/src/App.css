@@ -1,0 +1,14 @@
+#app {
+	max-width: 75rem;
+	margin: 0 auto;
+	padding: 3.75rem 1.785rem;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+	#app {
+		flex-direction: column;
+	}
+}

@@ -8,7 +8,7 @@ const DevSchema = new mongoose.Schema({
 		required: true
 	},
 	bio: String,
-	avatart_url: String,
+	avatar_url: String,
 	techs: [ String ],
 	location: {
 		type: PointSchema,

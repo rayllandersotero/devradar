@@ -1,0 +1,27 @@
+main {
+	flex: 1;
+}
+
+main ul {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.25rem;
+	list-style: none;
+}
+
+@media (max-width: 1024px) {
+	main {
+		width: 100%;
+		margin-top: 1.875rem;
+	}
+
+	main ul {
+		padding: 0;
+	}
+}
+
+@media (max-width: 660px) {
+	main ul {
+		grid-template-columns: 1fr;
+	}
+}

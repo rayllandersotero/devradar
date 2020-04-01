@@ -1,0 +1,50 @@
+.dev-item {
+	background: #fff;
+	box-shadow: 0 0 0.875rem rgba(0, 0, 0, 0.02);
+	border-radius: 0.125rem;
+	padding: 1.25rem;
+}
+
+.dev-item header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.dev-item header img {
+	width: 3.375rem;
+	height: 3.375rem;
+	border-radius: 50%;
+}
+
+.dev-item header .dev-info {
+	margin-left: 0.625rem;
+}
+
+.dev-item header .dev-info strong {
+	display: block;
+	color: #333;
+}
+
+.dev-item header .dev-info span {
+	font-size: 0.8125rem;
+	color: #999;
+	margin-top: 0.125rem;
+}
+
+.dev-item p {
+	color: #666;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	margin: 0.625rem 0;
+}
+
+.dev-item a {
+	color: #8e4dff;
+	font-size: 0.875rem;
+	text-decoration: none;
+}
+
+.dev-item a:hover {
+	text-decoration: underline;
+}
