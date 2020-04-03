@@ -6,6 +6,7 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons';
 
 import api from '../../services/api';
+import { connect, disconnect, subscribeToNewDev } from '../../services/socket';
 import styles from './styles';
 
 export default function Main() {
@@ -29,14 +30,23 @@ export default function Main() {
 				setCurrentRegion({
 					latitude,
 					longitude,
-					latitudeDelta: 0.02,
-					longitudeDelta: 0.02
+					latitudeDelta: 0.03,
+					longitudeDelta: 0.03
 				});
 			}
 		}
 
 		loadInitialPosition();
 	}, []);
+
+	useEffect(
+		() => {
+			subscribeToNewDev((dev) => {
+				setDevs([ ...devs, dev ]);
+			});
+		},
+		[ devs ]
+	);
 
 	if (!currentRegion) {
 		return null;
@@ -48,6 +58,14 @@ export default function Main() {
 
 	function handleRegionChanged(region) {
 		setCurrentRegion(region);
+	}
+
+	function setupWebsocket() {
+		disconnect();
+
+		const { latitude, longitude } = currentRegion;
+
+		connect(latitude, longitude, techs);
 	}
 
 	async function loadDevs() {
@@ -62,10 +80,11 @@ export default function Main() {
 		});
 
 		setDevs(response.data);
+		setupWebsocket();
 	}
 
 	return (
-		<>
+		<View>
 			<MapView onRegionChangeComplete={handleRegionChanged} initialRegion={currentRegion} style={styles.map}>
 				{devs.map((dev) => (
 					<Marker
@@ -103,6 +122,6 @@ export default function Main() {
 					<MaterialIcons name="my-location" size={20} color="#fff" />
 				</TouchableOpacity>
 			</View>
-		</>
+		</View>
 	);
 }

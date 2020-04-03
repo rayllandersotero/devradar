@@ -1,6 +1,7 @@
 const Axios = require('axios');
 
 const parseStringAsArray = require('../utils/parseStringAsArray');
+const { findConnections, sendMessage } = require('../bin/websocket');
 const Dev = require('../models/Dev');
 
 module.exports = {
@@ -16,6 +17,11 @@ module.exports = {
 
 	async create(req, res) {
 		const { github_username, techs, latitude, longitude } = req.body;
+
+		const dev = await Dev.findOne({ github_username });
+		if (dev) {
+			return res.status(400).json({ error: 'User already exists.' });
+		}
 
 		const techsStringToArray = parseStringAsArray(techs);
 
@@ -36,6 +42,16 @@ module.exports = {
 			location
 		})
 			.then((response) => {
+				const sendSocketMessageTo = findConnections(
+					{
+						latitude,
+						longitude
+					},
+					techsStringToArray
+				);
+
+				sendMessage(sendSocketMessageTo, 'new-dev', response);
+
 				return res.json(response);
 			})
 			.catch((error) => {
