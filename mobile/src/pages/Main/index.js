@@ -30,8 +30,8 @@ export default function Main() {
 				setCurrentRegion({
 					latitude,
 					longitude,
-					latitudeDelta: 0.03,
-					longitudeDelta: 0.03
+					latitudeDelta: 0.02,
+					longitudeDelta: 0.02
 				});
 			}
 		}
@@ -84,7 +84,7 @@ export default function Main() {
 	}
 
 	return (
-		<View>
+		<>
 			<MapView onRegionChangeComplete={handleRegionChanged} initialRegion={currentRegion} style={styles.map}>
 				{devs.map((dev) => (
 					<Marker
@@ -112,7 +112,7 @@ export default function Main() {
 					style={styles.searchInput}
 					placeholder="Techs separate for commas"
 					placeholderTextColor="#999"
-					autoCapitalize="words"
+					autoCapitalize="none"
 					autoCorrect={false}
 					value={techs}
 					onChangeText={setTechs}
@@ -122,6 +122,6 @@ export default function Main() {
 					<MaterialIcons name="my-location" size={20} color="#fff" />
 				</TouchableOpacity>
 			</View>
-		</View>
+		</>
 	);
 }

@@ -1,5 +1,5 @@
 # DevRadar
-A place where people can find developers arround.
+A place where people can find developers around.
 
 ## Languages and Technologies
 - NodeJs for back-end;
